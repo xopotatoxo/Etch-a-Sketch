@@ -15,6 +15,25 @@ button.classList.add("button");
 button.textContent = "Reset Grid";
 container.appendChild(button);
 
+const styleDiv = document.createElement("div");
+styleDiv.classList.add("div-style");  // Fixed the typo here
+
+const colorButton = document.createElement("button");
+colorButton.classList.add("colorButton");
+colorButton.textContent = "Select Random Color";
+
+const RedButton = document.createElement("button");
+RedButton.classList.add("RedButton");
+RedButton.textContent = "Black Color";
+
+styleDiv.appendChild(colorButton);
+styleDiv.appendChild(RedButton);
+
+container.appendChild(styleDiv);
+
+let randomColor = null;
+
+
 // Creating a grid of given size
 function createGrid(size) {
 
@@ -47,7 +66,7 @@ function createGrid(size) {
 
     cells.forEach(cell => {
         cell.addEventListener('mouseover', () => {
-            cell.style.backgroundColor = "red";
+            cell.style.backgroundColor = randomColor;
         });
     });
 }
@@ -59,3 +78,13 @@ createGrid(parseInt(x.value));
 button.addEventListener("click", () => {
     createGrid(parseInt(x.value)); // Recreate the grid based on input value
 });
+
+RedButton.addEventListener("click", () => {
+    randomColor = "black";
+})
+
+colorButton.addEventListener("click", () => {
+    for (let i = 0; i < 10; i++) {
+        randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    }
+})
